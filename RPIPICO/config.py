@@ -1,0 +1,5 @@
+wifi_ssid = 'B323'
+wifi_password = 'b323telem'
+mqtt_server = '192.168.50.200'
+mqtt_username = b'BROKER_USERNAME'
+mqtt_password = b'BROKER_PASSWORD'
