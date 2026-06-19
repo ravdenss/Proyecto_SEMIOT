@@ -1,0 +1,808 @@
+[
+    {
+        "id": "0ef245f3f52ec6f5",
+        "type": "tab",
+        "label": "Gateway/fog",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "421459092ad40630",
+        "type": "influxdb out",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "",
+        "measurement": "Consumo_total",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Telemática USM",
+        "bucket": "Proyecto_SEMIOT",
+        "x": 710,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a2d1b91ee82477f6",
+        "type": "influxdb out",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "",
+        "measurement": "Generacion_PV",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Telemática USM",
+        "bucket": "Proyecto_SEMIOT",
+        "x": 710,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "dcece090499eacaf",
+        "type": "mqtt in",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "Generacion_PV",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8138e3ee2e5eeb91",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 400,
+        "y": 180,
+        "wires": [
+            [
+                "a2d1b91ee82477f6",
+                "a963eaf772664545"
+            ]
+        ]
+    },
+    {
+        "id": "a9f978a6e2f2c74b",
+        "type": "mqtt in",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "Consumo_total",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8138e3ee2e5eeb91",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 400,
+        "y": 80,
+        "wires": [
+            [
+                "421459092ad40630",
+                "7f631eb8b39fa16f"
+            ]
+        ]
+    },
+    {
+        "id": "28b70a8be86d8285",
+        "type": "mqtt in",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "Carga_BESS",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8138e3ee2e5eeb91",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 970,
+        "y": 80,
+        "wires": [
+            [
+                "76b292c4ada07dfd",
+                "c8e4da6972485e51"
+            ]
+        ]
+    },
+    {
+        "id": "e0ab7d97fad84a8e",
+        "type": "mqtt in",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "Carga_EV",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8138e3ee2e5eeb91",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 420,
+        "y": 280,
+        "wires": [
+            [
+                "5ed1f02a793570a5",
+                "3a0f106b570ad352"
+            ]
+        ]
+    },
+    {
+        "id": "c4ab28bdb9fa5751",
+        "type": "mqtt in",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "SOC_EV",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8138e3ee2e5eeb91",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 420,
+        "y": 380,
+        "wires": [
+            [
+                "51b376eec79124ec",
+                "95f03a4dafe1edc6"
+            ]
+        ]
+    },
+    {
+        "id": "2c6b535e5af47535",
+        "type": "mqtt in",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "SOC_BESS",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8138e3ee2e5eeb91",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 970,
+        "y": 180,
+        "wires": [
+            [
+                "74be8971ceab1a9f",
+                "db71331be6ab9488"
+            ]
+        ]
+    },
+    {
+        "id": "76b292c4ada07dfd",
+        "type": "influxdb out",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "",
+        "measurement": "Carga_BESS",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Telemática USM",
+        "bucket": "Proyecto_SEMIOT",
+        "x": 1260,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "74be8971ceab1a9f",
+        "type": "influxdb out",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "",
+        "measurement": "SOC_BESS",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Telemática USM",
+        "bucket": "Proyecto_SEMIOT",
+        "x": 1260,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "5ed1f02a793570a5",
+        "type": "influxdb out",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "",
+        "measurement": "Carga_EV",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Telemática USM",
+        "bucket": "Proyecto_SEMIOT",
+        "x": 690,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "51b376eec79124ec",
+        "type": "influxdb out",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "",
+        "measurement": "SOC_EV",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Telemática USM",
+        "bucket": "Proyecto_SEMIOT",
+        "x": 690,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8d430ee4e98a99b8",
+        "type": "mqtt in",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "Consumo_AP",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8138e3ee2e5eeb91",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 970,
+        "y": 280,
+        "wires": [
+            [
+                "e9147e4674bd85c8"
+            ]
+        ]
+    },
+    {
+        "id": "26bae465b8ce71f4",
+        "type": "mqtt in",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "Consumo_hervidor",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8138e3ee2e5eeb91",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 950,
+        "y": 340,
+        "wires": [
+            [
+                "551502ce39d402ab"
+            ]
+        ]
+    },
+    {
+        "id": "e9147e4674bd85c8",
+        "type": "influxdb out",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "",
+        "measurement": "Consumo_AP",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Telemática USM",
+        "bucket": "Proyecto_SEMIOT",
+        "x": 1260,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "551502ce39d402ab",
+        "type": "influxdb out",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "",
+        "measurement": "Consumo_hervidor",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Telemática USM",
+        "bucket": "Proyecto_SEMIOT",
+        "x": 1280,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "04c58895f9e07836",
+        "type": "comment",
+        "z": "0ef245f3f52ec6f5",
+        "name": "Broker",
+        "info": "Esta seccion sólo conecta \nmosquitto con influxdb",
+        "x": 890,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d6556936a6e290b7",
+        "type": "inject",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 410,
+        "y": 540,
+        "wires": [
+            [
+                "29b0ceacb5f3d672",
+                "2f041a45adb7c599"
+            ]
+        ]
+    },
+    {
+        "id": "29b0ceacb5f3d672",
+        "type": "influxdb in",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "Get consumo latest",
+        "query": "from(bucket: \"Proyecto_SEMIOT\")\n  |> range(start: 0, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Consumo_total\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> last()\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "Telemática USM",
+        "x": 630,
+        "y": 540,
+        "wires": [
+            [
+                "d42352edf718e210"
+            ]
+        ]
+    },
+    {
+        "id": "a9b9cd55c383814b",
+        "type": "debug",
+        "z": "0ef245f3f52ec6f5",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "a498bf4583c1ae7e",
+        "type": "ThingspeakSendSimple",
+        "z": "0ef245f3f52ec6f5",
+        "name": "Consumo dashboard familiar",
+        "writekey": "ZC7T21TCA00Y6SO6",
+        "fieldid": "1",
+        "x": 1140,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "be153dca06b92ca6",
+        "type": "comment",
+        "z": "0ef245f3f52ec6f5",
+        "name": "Fields Thingspeak",
+        "info": "Field 1 Consumo total\nField 2 Índice de normalidad\nField 3 Status\n",
+        "x": 870,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "d42352edf718e210",
+        "type": "function",
+        "z": "0ef245f3f52ec6f5",
+        "name": "get_consumo_latest",
+        "func": "let msg2 = msg;\nmsg2.payload = msg.payload[0]._value;\nreturn msg2;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 540,
+        "wires": [
+            [
+                "a498bf4583c1ae7e",
+                "a9b9cd55c383814b"
+            ]
+        ]
+    },
+    {
+        "id": "2f041a45adb7c599",
+        "type": "influxdb in",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "Get consumo last 48",
+        "query": "from(bucket: \"Proyecto_SEMIOT\")\n  |> range(start: 0, stop: now())\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Consumo_total\")\n  |> filter(fn: (r) => r[\"_field\"] == \"value\")\n  |> limit(n: 48)\n  |> yield(name: \"last\")",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "Telemática USM",
+        "x": 640,
+        "y": 620,
+        "wires": [
+            [
+                "066c46c344715949"
+            ]
+        ]
+    },
+    {
+        "id": "066c46c344715949",
+        "type": "function",
+        "z": "0ef245f3f52ec6f5",
+        "name": "make_normality_index",
+        "func": "let msg2 = msg;\n//msg2.payload = msg.payload[0]._value;\nlet dif = 0;\nlet tot = 0;\nfor (let i = 0; i < 24; i++) {\n  dif = msg.payload[i]._value - msg.payload[i+24]._value;\n  tot += dif/24;\n}\nmsg2.payload = 1-tot;\nreturn msg2;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 620,
+        "wires": [
+            [
+                "a18b7c595e424f3d",
+                "0a08d68cc68df3a9"
+            ]
+        ]
+    },
+    {
+        "id": "a18b7c595e424f3d",
+        "type": "ThingspeakSendSimple",
+        "z": "0ef245f3f52ec6f5",
+        "name": "Index dashboard familiar",
+        "writekey": "ZC7T21TCA00Y6SO6",
+        "fieldid": "2",
+        "x": 1150,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "0a08d68cc68df3a9",
+        "type": "function",
+        "z": "0ef245f3f52ec6f5",
+        "name": "eval_normality_index",
+        "func": "let msg2 = msg;\nlet i = msg.payload;\n\nif (i >= 0.5) {\n  msg2.payload=\"Todo bien!\";\n} else if (i >= 0.1) {\n  msg2.payload = \"Posible anomalía\";\n} else {\n  msg2.payload = \"Alerta! Revisar estado de persona\";\n}\nreturn msg2;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 660,
+        "wires": [
+            [
+                "01bf0ada73780cf5"
+            ]
+        ]
+    },
+    {
+        "id": "01bf0ada73780cf5",
+        "type": "ThingspeakSendSimple",
+        "z": "0ef245f3f52ec6f5",
+        "name": "Status dashboard familiar",
+        "writekey": "ZC7T21TCA00Y6SO6",
+        "fieldid": "3",
+        "x": 1370,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "7f631eb8b39fa16f",
+        "type": "mqtt out",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "jvilon/feeds/semiot.consumo-total",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f89c500888233d40",
+        "x": 700,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "bb52de83f6e2f89c",
+        "type": "inject",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "payload",
+        "payload": "0.1",
+        "payloadType": "num",
+        "x": 850,
+        "y": 700,
+        "wires": [
+            [
+                "a18b7c595e424f3d"
+            ]
+        ]
+    },
+    {
+        "id": "a963eaf772664545",
+        "type": "mqtt out",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "jvilon/feeds/semiot.generacion-pv",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f89c500888233d40",
+        "x": 700,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c8e4da6972485e51",
+        "type": "mqtt out",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "jvilon/feeds/semiot.carga-bess",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f89c500888233d40",
+        "x": 1250,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "db71331be6ab9488",
+        "type": "mqtt out",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "jvilon/feeds/semiot.porcentaje-bess",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f89c500888233d40",
+        "x": 1260,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "3a0f106b570ad352",
+        "type": "mqtt out",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "jvilon/feeds/semiot.carga-ev",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f89c500888233d40",
+        "x": 680,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "95f03a4dafe1edc6",
+        "type": "mqtt out",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "jvilon/feeds/semiot.porcentaje-ev",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f89c500888233d40",
+        "x": 700,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "3f37b20babbeb154",
+        "type": "influxdb out",
+        "z": "0ef245f3f52ec6f5",
+        "influxdb": "4738f1a2602e8149",
+        "name": "",
+        "measurement": "Consumo_LIVE",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Telemática USM",
+        "bucket": "Proyecto_SEMIOT",
+        "x": 1270,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "5ab27da796be2f4b",
+        "type": "mqtt in",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "Consumo_LIVE",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "8138e3ee2e5eeb91",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1000,
+        "y": 400,
+        "wires": [
+            [
+                "3f37b20babbeb154",
+                "0b96a9b1439a5f9c"
+            ]
+        ]
+    },
+    {
+        "id": "0b96a9b1439a5f9c",
+        "type": "mqtt out",
+        "z": "0ef245f3f52ec6f5",
+        "name": "",
+        "topic": "jvilon/feeds/semiot.consumo-LIVE",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f89c500888233d40",
+        "x": 1260,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "4738f1a2602e8149",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "influx_db_local",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://0.0.0.0:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "8138e3ee2e5eeb91",
+        "type": "mqtt-broker",
+        "name": "mosquitto_local",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "f89c500888233d40",
+        "type": "mqtt-broker",
+        "name": "AdaFruit",
+        "broker": "io.adafruit.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c1ced2cc3e641901",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-influxdb": "0.7.0",
+            "node-red-contrib-thingspeak": "0.0.4"
+        }
+    }
+]

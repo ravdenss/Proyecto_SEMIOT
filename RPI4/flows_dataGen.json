@@ -1,0 +1,698 @@
+[
+    {
+        "id": "53ee28e40c0f25f6",
+        "type": "tab",
+        "label": "DataGen",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0ab6dd2952df7e12",
+        "type": "inject",
+        "z": "53ee28e40c0f25f6",
+        "name": "Read_full",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2880",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "e59e796176b56d2f"
+            ]
+        ]
+    },
+    {
+        "id": "e59e796176b56d2f",
+        "type": "file in",
+        "z": "53ee28e40c0f25f6",
+        "name": "",
+        "filename": "/home/pi/csv/consumo_generacion.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "06bcaeca3a0aa404"
+            ]
+        ]
+    },
+    {
+        "id": "06bcaeca3a0aa404",
+        "type": "csv",
+        "z": "53ee28e40c0f25f6",
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": true,
+        "include_null_values": true,
+        "x": 670,
+        "y": 160,
+        "wires": [
+            [
+                "bc82e4e024a7d1fa"
+            ]
+        ]
+    },
+    {
+        "id": "bc82e4e024a7d1fa",
+        "type": "delay",
+        "z": "53ee28e40c0f25f6",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "30",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "c759b2d00b131532",
+                "f7178a5a14d87b7f"
+            ]
+        ]
+    },
+    {
+        "id": "c759b2d00b131532",
+        "type": "function",
+        "z": "53ee28e40c0f25f6",
+        "name": "get_generacion",
+        "func": "let msg2 = msg;\nmsg2.payload = msg.payload.solar_kWh;\nreturn msg2;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "1bd4dd96813c250d",
+                "4ba39cb889656bbe"
+            ]
+        ]
+    },
+    {
+        "id": "f7178a5a14d87b7f",
+        "type": "function",
+        "z": "53ee28e40c0f25f6",
+        "name": "get_consumo",
+        "func": "let msg2 = msg;\nmsg2.payload = msg.payload.as230_import_kWh - msg.payload.as230_export_kWh;\nreturn msg2;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "04e92ccba9e39233",
+                "01a2c75176d3a021"
+            ]
+        ]
+    },
+    {
+        "id": "1bd4dd96813c250d",
+        "type": "debug",
+        "z": "53ee28e40c0f25f6",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "04e92ccba9e39233",
+        "type": "debug",
+        "z": "53ee28e40c0f25f6",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "01a2c75176d3a021",
+        "type": "mqtt out",
+        "z": "53ee28e40c0f25f6",
+        "name": "",
+        "topic": "Consumo_total",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8138e3ee2e5eeb91",
+        "x": 600,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "4ba39cb889656bbe",
+        "type": "mqtt out",
+        "z": "53ee28e40c0f25f6",
+        "name": "",
+        "topic": "Generacion_PV",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8138e3ee2e5eeb91",
+        "x": 600,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "410fbd7785335ce1",
+        "type": "inject",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "Read_full",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "24",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "28e1d9a644faa854",
+        "type": "file in",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "filename": "/home/pi/csv/consumo_generacion.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 430,
+        "y": 540,
+        "wires": [
+            [
+                "add999b77a180750"
+            ]
+        ]
+    },
+    {
+        "id": "add999b77a180750",
+        "type": "csv",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": true,
+        "include_null_values": true,
+        "x": 670,
+        "y": 540,
+        "wires": [
+            [
+                "8d7013915ac750e5"
+            ]
+        ]
+    },
+    {
+        "id": "8d7013915ac750e5",
+        "type": "delay",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 810,
+        "y": 540,
+        "wires": [
+            [
+                "35ebd16e6b235f23",
+                "3e083d2eef8c1873"
+            ]
+        ]
+    },
+    {
+        "id": "35ebd16e6b235f23",
+        "type": "function",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "get_soc_BESS",
+        "func": "let msg2 = msg;\nmsg2.payload = msg.payload.solar_kWh; \nreturn msg2;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 800,
+        "wires": [
+            [
+                "519beeb31b6e15a9",
+                "ed4b5c2256c493eb"
+            ]
+        ]
+    },
+    {
+        "id": "3e083d2eef8c1873",
+        "type": "function",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "get_carga_BESS",
+        "func": "let msg2 = msg;\nmsg2.payload = msg.payload.as230_import_kWh - msg.payload.as230_export_kWh;\nreturn msg2;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 680,
+        "wires": [
+            [
+                "f5ad92234a697943",
+                "561bf017991ae0d6"
+            ]
+        ]
+    },
+    {
+        "id": "519beeb31b6e15a9",
+        "type": "debug",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "debug 7",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "f5ad92234a697943",
+        "type": "debug",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "561bf017991ae0d6",
+        "type": "mqtt out",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "topic": "Carga_BESS",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8138e3ee2e5eeb91",
+        "x": 1290,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "ed4b5c2256c493eb",
+        "type": "mqtt out",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "topic": "SOC_BESS",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8138e3ee2e5eeb91",
+        "x": 1290,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "26250b95a1c62ae1",
+        "type": "inject",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "Read_full",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "24",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9044bde678a68d8d",
+        "type": "file in",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "filename": "/home/pi/csv/consumo_generacion.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 450,
+        "y": 940,
+        "wires": [
+            [
+                "5d163d07aa88e504"
+            ]
+        ]
+    },
+    {
+        "id": "5d163d07aa88e504",
+        "type": "csv",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": true,
+        "include_null_values": true,
+        "x": 690,
+        "y": 940,
+        "wires": [
+            [
+                "c7d4734c9945fad2"
+            ]
+        ]
+    },
+    {
+        "id": "c7d4734c9945fad2",
+        "type": "delay",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 830,
+        "y": 940,
+        "wires": [
+            [
+                "6c3f6bdb7f2cfa6d",
+                "28de5c17e0c4286f"
+            ]
+        ]
+    },
+    {
+        "id": "6c3f6bdb7f2cfa6d",
+        "type": "function",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "get_soc_EV",
+        "func": "let msg2 = msg;\nmsg2.payload = msg.payload.solar_kWh; \nreturn msg2;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 1200,
+        "wires": [
+            [
+                "68f52b22f7299d8b",
+                "36904ad0aa6da050"
+            ]
+        ]
+    },
+    {
+        "id": "28de5c17e0c4286f",
+        "type": "function",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "get_carga_EV",
+        "func": "let msg2 = msg;\nmsg2.payload = msg.payload.as230_import_kWh - msg.payload.as230_export_kWh;\nreturn msg2;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 1080,
+        "wires": [
+            [
+                "1df0200d0d9b4967",
+                "66581a47d6251623"
+            ]
+        ]
+    },
+    {
+        "id": "68f52b22f7299d8b",
+        "type": "debug",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "1df0200d0d9b4967",
+        "type": "debug",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "debug 9",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "66581a47d6251623",
+        "type": "mqtt out",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "topic": "Carga_EV",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8138e3ee2e5eeb91",
+        "x": 1310,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "36904ad0aa6da050",
+        "type": "mqtt out",
+        "z": "53ee28e40c0f25f6",
+        "d": true,
+        "name": "",
+        "topic": "SOC_EV",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8138e3ee2e5eeb91",
+        "x": 1300,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "a3f43f2cde6d78f1",
+        "type": "comment",
+        "z": "53ee28e40c0f25f6",
+        "name": "Emulación",
+        "info": "Esta parte lee datos del csv del dataset\npara enviar consumo y generación PV",
+        "x": 860,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8138e3ee2e5eeb91",
+        "type": "mqtt-broker",
+        "name": "mosquitto_local",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

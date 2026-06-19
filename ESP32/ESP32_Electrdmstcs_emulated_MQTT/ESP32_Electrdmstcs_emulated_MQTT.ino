@@ -159,7 +159,7 @@ void loop() {
 
   long now = millis();
                     // 1 min
-  if (now - lastMsg > 60*1000) {
+  if (now - lastMsg > 30*1000) {
     digitalWrite(LED_BUILTIN, HIGH);
     delay(1000);
     digitalWrite(LED_BUILTIN, LOW);
@@ -167,16 +167,18 @@ void loop() {
     int test = analogRead(pinSCT);
     Serial.print("ADC= ");
     Serial.println(test);
+    
+    double I = 0;
+    for (int i = 0; i < 1000; i++) {
+      I += analogRead(pinSCT) * 2 * 0.02557575 / 1000;
+    }
 
 
-
-    double Irms = SCT013.calcIrms(1480*10); 
-    //double I_calib = Irms*1.0548-0.0142;  //use calib factor here
-    double I_calib = Irms;
-    float power = I_calib * 220;
+    //double I = test * 0.0114774;
+    int power = I * 220;
 
     Serial.print("Current = ");
-    Serial.print(Irms);
+    Serial.print(I);
     Serial.println(" A");
     Serial.print("Power = ");
     Serial.print(power);
@@ -192,6 +194,8 @@ void loop() {
     client.publish("Consumo_AP", tempString);
     dtostrf(dataset_hervidor[current], 1, 2, tempString);
     client.publish("Consumo_hervidor", tempString);
+    dtostrf(power, 1, 2, tempString);
+    client.publish("Consumo_LIVE", tempString);
     //dtostrf(power, 1, 2, tempString);
     //client.publish("SCT-013", tempString);
     //Serial.println(dataset_AP[current]);
